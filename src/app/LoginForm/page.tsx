@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { auth } from "../firebase"; // Firebase config import
+import { auth } from "../firebase"; 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import ClickSpark from "../animations/click-sparks";
