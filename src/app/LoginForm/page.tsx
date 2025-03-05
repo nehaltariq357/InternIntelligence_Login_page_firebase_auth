@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { auth } from "../firebase"; 
+import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import ClickSpark from "../animations/click-sparks";
+import Image from "next/image";
+import Link from "next/link";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -28,34 +29,63 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-700 text-white">
-      <div className="bg-white bg-opacity-10 backdrop-blur-lg p-8 rounded-2xl shadow-2xl text-center w-96">
-        <h1 className="text-3xl font-bold mb-6">Login</h1>
-        <form onSubmit={handleLogin} className="flex flex-col">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-3 mb-3 bg-transparent border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all"
-            required
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="flex w-[900px] bg-white rounded-lg shadow-lg overflow-hidden">
+        {/* Left Side (Full Cover Image) */}
+        <div className="w-1/2 relative">
+          <Image
+            src="/left-pic.png"
+            layout="fill"
+            objectFit="cover"
+            alt="Register Illustration"
           />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full p-3 mb-3 bg-transparent border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all"
-            required
-          />
-          {error && <p className="text-red-400 mb-3">{error}</p>}
-          <button className="bg-purple-600 hover:bg-purple-700 transition-all py-3 rounded-lg text-white font-semibold shadow-lg active:scale-95">
-            Login
-          </button>
-        </form>
-        <ClickSpark />
+        </div>
+
+        {/* Right Side (Login Form) */}
+        <div className="w-1/2 p-8 flex flex-col justify-center">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Log In</h1>
+          <p className="text-gray-500 mb-6 text-sm">
+            Enter your email and password to log in to your dashboard.
+          </p>
+
+          <form onSubmit={handleLogin} className="flex flex-col">
+            <label className="text-gray-700 font-medium">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              required
+            />
+            <label className="text-gray-700 font-medium">Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              required
+            />
+
+            {error && <p className="text-red-500 mb-3">{error}</p>}
+
+            <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition-all">
+              Sign In
+            </button>
+          </form>
+
+          <div className="flex justify-between text-sm text-gray-600 mt-4">
+            <a href="#" className="hover:text-indigo-600">
+              Forgot Password?
+            </a>
+            <Link href="/registerForm" className="hover:text-indigo-600">
+              Sign Up
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
